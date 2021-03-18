@@ -1,9 +1,12 @@
 echo "WElcome"
-ispresent=1
-randomcheck=$((RANDOM%2))
-if [[ $ispresent -eq $randomcheck ]]
+isPresent=1;
+RandomCheck=$(( $RANDOM%2 ));
+if [ $isPresent -eq $RandomCheck ];
 then
-      echo "Employee is Present"
+        EmpRatePerHr=20;
+        EmpHrs=8;
+Salary=$(($EmpHrs*$EmpRatePerHr));
 else
-      echo "Employee is Absent"
+Salary=0;
 fi
+echo $Salary
