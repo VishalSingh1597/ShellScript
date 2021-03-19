@@ -1,36 +1,28 @@
-#!/bin/bash
-
-read -p "Enter any number : " num;
-
-declare -i arr;
-j=0;
-
-function sqrt()
-{
-sqrt=`echo $1 | awk '{ print $0*$0 }'`;
-echo $sqrt;
-}
-while [ $(( num % 2 )) -eq 0 ]
-do
-	num=`echo $num | awk '{ print $0/2 }'`;
-	arr[$j]=2;
-        (( j++ ));
-done
-
-for (( i=3; `echo $i $( sqrt $num ) | awk '{print $1 < $2}'`;i=$(( i+2 )) ))
-do
-	while [ $((num % i)) -eq 0 ]
-	do
-		num=`echo $num | awk '{ print $0/$i }'`;
-		arr[$j]=$i;
-		(( j++ ));
-	done
-done
-
-if [ $num -gt 2 ]
-then
-	arr[$j]=$num;
-        (( j++ ));
-fi
-
-echo ${arr[@]};
+echo "enter an integer:"
+read input
+i=2
+count=0
+flag=0
+for ((i;i<$input;));do
+      if [ `expr $input % $i` -eq 0 ];then
+      factor=$i
+for ((j=2;j<=`expr $factor / 2`;));do
+      flag=0
+      if [ `expr $factor % $j` -eq 0 ];then
+      flag=1
+      break
+      fi
+      j=`expr $j + 1`
+  done
+  if [ $flag -eq 0 ];then
+   nos=$factor
+   array[$i]=$nos
+  count=1
+  fi
+  fi
+  i=`expr $i + 1`
+  done
+  if [ $count -eq 0 ];then
+  echo "no prime factors found except 1 and $input"
+  fi
+echo ${array[@]}
